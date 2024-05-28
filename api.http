@@ -1,0 +1,26 @@
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "fullName":"Mateo Alvarez",
+    "password":"Mate0&lvarez",
+    "email":"mateoalvarez384@gmail.com"
+}
+###
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"mateoalvarez384@gmail.com",
+    "password":"Mate0&lvarez"
+}
+
+
+### PASSWORD
+POST http://localhost:3000/api/v1/password
+Content-Type: application/json
+
+{
+    "name":"Netflix",
+    "password":"Mateo"
+}
