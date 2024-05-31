@@ -1,11 +1,9 @@
 import { toast } from 'sonner';
 import bcrypt from 'bcryptjs-react';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-export const useForm = ( paramUrl , initialState ) => {
-    const URL = `http://localhost:3000/api/v1/auth/${paramUrl}`;
-    const navigate = useNavigate();
+export const UseRegister = ( paramUrl , initialState , token ) => {
+    const URL = `http://localhost:3000/api/v1/${paramUrl}`;
   
     const [form, setForm] = useState( initialState );
     
@@ -53,21 +51,18 @@ export const useForm = ( paramUrl , initialState ) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
           },
           body: JSON.stringify(form),
-        });
-  
+        }
+      );
         if (!res.ok) {
-         toast.error('No user was found with this credentials')
-         return
+         toast.error('The record could not be created, check the data.')
+        
         }
         
-        const data = await res.json();
-        localStorage.setItem('token', JSON.stringify(data.token));
-        toast.success('You have successfully registered');
-        navigate('/get');
-        
-        setForm(initialState);
+        toast.success('Register successfully created');
+       
       }
   
       return {

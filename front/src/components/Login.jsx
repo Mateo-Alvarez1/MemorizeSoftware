@@ -11,10 +11,10 @@ export const Login = () => {
 
   return (
     <div
-      className="bg-gradient-to-br from-gray-800 to-zinc-900
+      className="bg-gradient-to-br from-zinc-800 to-zinc-900
     h-screen flex justify-center items-center font-pp"
     >
-      <form onSubmit={onHandleSubmit} className="w-full mx-10  px-7 py-7 flex flex-col rounded-lg bg-gray-600 bg-opacity-10  ">
+      <form onSubmit={onHandleSubmit} className="w-max mx-10  px-7 py-7 flex flex-col rounded-lg bg-gray-600 bg-opacity-10  ">
         <h1 className="mx-auto text-2xl mb-5 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent  font-bold ">
           Login
         </h1>
@@ -51,7 +51,7 @@ export const Login = () => {
           />
         </div>
 
-        <Button />
+        <Button text='Sign Up' />
         <p className="text-sm pt-4 mx-auto text-gray-200">
           Still don't have an account ?{' '}
           <a href="/" className="text-indigo-500 underline">
