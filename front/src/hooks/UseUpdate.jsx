@@ -2,10 +2,10 @@ import { toast } from 'sonner';
 import bcrypt from 'bcryptjs-react';
 import { useState } from 'react';
 
-export const UseRegister = (  paramUrl , initialState , token ) => {
-    const URL = `http://localhost:3000/api/v1/${paramUrl}`;
-    const [form, setForm] = useState( initialState );
-
+export const UseUpdate = (  id , paramUrl , initialState , token ) => {
+    const URL = `http://localhost:3000/api/v1/${paramUrl}/${id}`;
+    const [form, setForm] = useState(initialState);
+   
     const onHandleInput = (e) => {
       const { value, name } = e.target;
       setForm((prevForm) => ({
@@ -14,30 +14,23 @@ export const UseRegister = (  paramUrl , initialState , token ) => {
       }));
     };
 
+  
       const onHandleSubmit = async (e) => {
+
         e.preventDefault();
   
+        
         if (form.name.trim().length < 2 ) {
           toast.error('Name must contain 2 letters or more');
           return
         }
+ 
         
         if (form.password.trim().length <= 0 ) {
           toast.error('Password must not be empty');
           return
         }
 
-
-
-        if (URL === `${URL}/register`) {
-             if (form.fullName.trim().length <= 2) {
-              toast.error('Name must contain 2 letters or more');
-              return;
-            }
-        }
-
-    
-  
         const encodedPassword = bcrypt.hashSync(form.password, 12);
         setForm((prev) => ({
           ...prev,
@@ -45,7 +38,7 @@ export const UseRegister = (  paramUrl , initialState , token ) => {
         }));
   
         const res = await fetch( URL, {
-          method: 'POST',
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -58,7 +51,7 @@ export const UseRegister = (  paramUrl , initialState , token ) => {
         
         }
         
-        toast.success('Register successfully created');
+        toast.success('Register successfully Update');
        
       }
   

@@ -1,5 +1,5 @@
-import { Register, Login } from '../components';
-import { Get } from '../components/Get';
+import { Login, Register } from '../components/Auth';
+import {  Home } from '../components/Home';
 
 export const routes = [
   {
@@ -11,7 +11,7 @@ export const routes = [
     element: <Login />,
   },
   {
-    path: '/get',
-    element: <Get />,
+    path: '/home',
+    element: <Home />,
   },
 ];

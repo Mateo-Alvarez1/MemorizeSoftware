@@ -2,3 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cross:hover{
+    filter: invert(45%) sepia(78%) saturate(2140%) hue-rotate(315deg) brightness(92%) contrast(103%);
+  }

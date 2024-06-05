@@ -1,9 +1,12 @@
-import React from 'react';
-import { Button } from '../layout/Button';
-import { useForm } from '../hooks/UseForm';
+import React, { useState } from 'react';
+import { Button } from '../../layout/Button';
+import { useForm } from '../../hooks/UseForm';
+import eyeOpen from '../../assets/eyeOpen.svg'
+import eyeClose from '../../assets/eye.svg'
 
 export const Register = () => {
 
+  const [show, setShow] = useState(false)
   const {onHandleInput , onHandleSubmit } = useForm('register' ,  {
     fullName:'' ,
     email:'',
@@ -57,24 +60,27 @@ export const Register = () => {
             required
           />
         </div>
-        <div className="flex flex-col my-3 -ml-2">
-          {' '}
-          <label
-            className="bg-transparent text-md text-gray-200 pb-1 font-medium"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            className="bg-transparent border border-gray-100 p-2 rounded-md pl-2 text-sm font-medium outline-none text-white "
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={onHandleInput}
-            required
-          />
-        </div>
+        <div className="flex flex-col my-3  relative">
+            {' '}
+            <label
+              className="bg-transparent text-md text-gray-200 pb-1 font-medium"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              className="bg-transparent px-16 border border-gray-100 p-2 rounded-md pl-2 text-sm font-medium outline-none text-white "
+              type={ show ? "text" : "password"}
+              placeholder="Password"
+              name="password"
+              onChange={onHandleInput}
+            />
+            {
+              show ? <img onClick={ () => setShow(!show)} className='top-9 left-52 w-6 absolute' src={eyeOpen} alt="" />
+              : <img onClick={ () => setShow(!show)} className='top-9 left-52 w-6 absolute' src={eyeClose} alt="" />
+            }
+          </div>
 
         <Button text='Sign Up'/>
         <p className="text-sm pt-4 mx-auto text-gray-200 hover:">

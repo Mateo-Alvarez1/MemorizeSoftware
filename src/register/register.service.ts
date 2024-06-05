@@ -9,30 +9,31 @@ import { UpdateRegisterDto } from './dto/update-register.dto';
 import { User } from 'src/auth/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Register } from './entities/register.entity';
-import { DataSource, Repository } from 'typeorm';
-import * as crypto from 'crypto';
+import {  DataSource, Repository } from 'typeorm';
+import * as CryptoJs from 'crypto-js'
 
 @Injectable()
 export class RegisterService {
 
-  secret:Buffer
+  private secret_key:string;
+
   constructor(
     @InjectRepository(Register)
     private readonly registerRepository: Repository<Register>,
     private readonly dataSource: DataSource,
   ) {
-    this.secret = crypto.randomBytes(32);
+    this.secret_key = process.env.SECRET_ENCODED_KEY
   }
 
   async create(createRegisterDto: CreateRegisterDto, user: User) {
     try {
       const { password, ...registerDetails } = createRegisterDto;
-      const { plainPassword } = this.encriptedPassword(password , this.secret);
 
+      const encodedPassword= this.encodedPassword(password , this.secret_key)
       
       const register = this.registerRepository.create({
         ...registerDetails,
-        password: plainPassword ,
+        password: encodedPassword,
         user: user,
       });
 
@@ -56,12 +57,13 @@ export class RegisterService {
       throw new NotFoundException(`Product with ${term} not found`);
     }
 
-    // const password = registers.map(item => item.password).toString()
-    // const cypher = this.encriptedPassword(password, this.secret);
-    // console.log(cypher);
-    // const desencriptedPassword = this.desencriptedPassword(cypher , this.secret)
+    const decodedPasswords = registers.map(item => ({
+      id: item.id,
+      name: item.name,
+      password: this.desencodedPassword(item.password, this.secret_key), 
+    }));
 
-    return registers;
+    return decodedPasswords
   }
 
   async remove(id: string) {
@@ -84,10 +86,12 @@ export class RegisterService {
     if (!register)
       throw new NotFoundException(`Not found product whit id: ${id}`);
 
+    const encodedPassword = this.encodedPassword(register.password , this.secret_key)
+    register.password = encodedPassword
+    
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
-
     try {
       register.user = user;
       await queryRunner.manager.save(register);
@@ -106,37 +110,26 @@ export class RegisterService {
     throw new InternalServerErrorException('Unexpected error check the logs');
   }
 
-  private encriptedPassword(password: string , secret:Buffer) {
+  private encodedPassword(password: string , key:any) {
     try {
-      const algorithim = 'aes-256-cbc';
-      const initialValue = crypto.randomBytes(16);
-
-      const cypher = crypto.createCipheriv(algorithim, secret, initialValue);
-      const encriptedPassword = Buffer.concat([
-        cypher.update(password),
-        cypher.final(),
-      ]);
-      return {
-        initialValue: initialValue.toString("hex"),
-        plainPassword: encriptedPassword.toString('hex')
-      };
       
+      const cypherText = CryptoJs.AES.encrypt(password , key).toString()
+      return cypherText  
     } catch (error) {
       console.log(error);
+      
     }
   }
 
-  //  private desencriptedPassword(password:any , secret:Buffer) {
-  //    try {
-  //      const algorithim = 'aes-256-cbc';
-  //      const initialValue = Buffer.from(password.initialValue , 'hex')
-  //      const passwordValue = Buffer.from(password.plainPassword , 'hex')
-
-  //      const decypher = crypto.createDecipheriv(algorithim, secret, initialValue);
-            
-  //     return Buffer.concat([decypher.update(passwordValue),decypher.final()]).toString();      
-  //    } catch (error) {
-  //      console.log(error);
-  //    }
-  //  }
+  private desencodedPassword(cypher: string  ,key:string) {
+    try {
+      const bytes = CryptoJs.AES.decrypt(cypher , key)
+      if (bytes.sigBytes > 0 ) {
+        const decryptedData = bytes.toString(CryptoJs.enc.Utf8)
+        return decryptedData
+      }
+    } catch (error) {
+      throw new Error('Decryption Failed')
+    }
+}
 }

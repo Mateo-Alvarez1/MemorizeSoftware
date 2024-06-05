@@ -65,7 +65,7 @@ export const useForm = ( paramUrl , initialState ) => {
         const data = await res.json();
         localStorage.setItem('token', JSON.stringify(data.token));
         toast.success('You have successfully registered');
-        navigate('/get');
+        navigate('/home');
         
         setForm(initialState);
       }
