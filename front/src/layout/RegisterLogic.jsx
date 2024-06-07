@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import eyeOpen from '../assets/eyeOpen.svg'
 import eyeClose from '../assets/eye.svg'
 import { UseRegister } from '../hooks/UseRegister';
 import x from '../assets/x.svg'
 
-export const RegisterLogic = ({ modal , setModal  }) => {
+export const RegisterLogic = ({ modal , setModal}) => {
 
   const [show, setShow] = useState(false);
   const token = localStorage.getItem('token');
   const cleanToken = JSON.parse(token);
+
 
   const { onHandleInput, onHandleSubmit } = UseRegister(
     'register',
@@ -18,6 +19,7 @@ export const RegisterLogic = ({ modal , setModal  }) => {
     },
     cleanToken,
   );
+
 
 
   return (
@@ -83,7 +85,7 @@ export const RegisterLogic = ({ modal , setModal  }) => {
           <div className='flex flex-col xl:gap-5 xl:flex-row'>
 
           <button
-            onClick={ () => setModal(!modal)}
+            onClick={() => setModal(!modal)}
             type="submit"
             className="px-24 bg-gradient-to-br mt-3 xl:-mb-2 from-gray-600 to-zinc-400 text-gray-200 text-ml rounded-md p-2 font-semibold  hover:drop-shadow-[0px_4px_8px_#545a75] transition-all"
           >

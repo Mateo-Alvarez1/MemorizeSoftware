@@ -1,22 +1,22 @@
 import { toast } from 'sonner';
 import bcrypt from 'bcryptjs-react';
-import { useState } from 'react';
+import {  useState } from 'react';
 
-export const UseRegister = (  paramUrl , initialState , token ) => {
+export const UseRegister = (  paramUrl , initialState , token , formRef ) => {
     const URL = `http://localhost:3000/api/v1/${paramUrl}`;
     const [form, setForm] = useState( initialState );
 
     const onHandleInput = (e) => {
       const { value, name } = e.target;
       setForm((prevForm) => ({
-        ...prevForm,
+        ...prevForm,  
         [name]: value,
       }));
     };
 
+ 
       const onHandleSubmit = async (e) => {
-        e.preventDefault();
-  
+        e.preventDefault()
         if (form.name.trim().length < 2 ) {
           toast.error('Name must contain 2 letters or more');
           return
@@ -35,8 +35,6 @@ export const UseRegister = (  paramUrl , initialState , token ) => {
               return;
             }
         }
-
-    
   
         const encodedPassword = bcrypt.hashSync(form.password, 12);
         setForm((prev) => ({
@@ -53,18 +51,17 @@ export const UseRegister = (  paramUrl , initialState , token ) => {
           body: JSON.stringify(form),
         }
       );
+
         if (!res.ok) {
          toast.error('The record could not be created, check the data.')
-        
-        }
-        
-        toast.success('Register successfully created');
-       
+         }
+         toast.success('Register successfully created');
+         formRef.current.reset()
       }
   
       return {
         onHandleInput ,
         onHandleSubmit,
-        form
+        form,
       }
   }

@@ -61,7 +61,7 @@ export const Login = () => {
         <Button text='Sign Up' />
         <p className="text-sm pt-4 mx-auto text-gray-200">
           Still don't have an account ?{' '}
-          <a href="/" className="text-indigo-500 underline">
+          <a href="/register" className="text-indigo-500 underline">
             Sign Up
           </a>
         </p>
