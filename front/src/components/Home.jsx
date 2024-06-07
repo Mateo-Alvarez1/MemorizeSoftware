@@ -50,7 +50,7 @@ export const Home = () => {
         </h1>
         <div onClick={ () => setModal(!modal)} className={`cursor-pointer absolute right-5 lg:right-32 h-16 w-16 rounded-full bg-zinc-800 ${ modal && 'lg:w-56 lg:h-16'}`}>
           <h2 className={`text-center text-2xl lg:text-2xl absolute bottom-0 left-5 -top-16 text-center py-20 font-pp font-medium text-zinc-400 ${modal && 'text-sm right-32 left-2.5 -top-14 lg:-top-16'}`}> { modal ? decodedToken.fullName : initial}</h2>
-          <p className={`bg-zinc-700 bg-opacity-20 lg:py-3.5 pt-16 pb-5 top-0 rounded-full  lg:pl-6 pr-3.5 lg:pr-5 cursor-pointer absolute lg:top-1 mr-2 right:20 -left-0 lg:left-28 flex lg:text-xl text-red-500 font-medium ${ modal ? 'block text-base pl-1 pr-2':'hidden'} `}><span className='pl-1' onClick={logout}>Logout</span></p>
+          <p className={`bg-zinc-700 bg-opacity-20 lg:py-3.5 pt-16 pb-5 top-0 rounded-full  lg:pl-6 pr-3.5 lg:pr-5 cursor-pointer absolute lg:top-1 mr-2 right:20 -left-0 lg:left-28 flex lg:text-xl text-red-500 font-medium ${ modal ? 'block text-base pl-1 pr-2':'hidden'} `}><span className='pl-1 lg:pl-0' onClick={logout}>Logout</span></p>
         </div>
       </div>
       <Table password={password}/>

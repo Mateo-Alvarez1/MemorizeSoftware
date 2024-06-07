@@ -14,13 +14,14 @@ export const Register = () => {
   })
   
   return (
-    <div
-      className="bg-gradient-to-br from-zinc-800 to-zinc-900 h-screen flex justify-center items-center font-pp"
+<div
+      className="bg-pattern pb-10 lg:pb-0 overflow-x-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 h-max lg:h-screen flex flex-col lg:flex-row justify-between items-center 2xl:px-52 px-28 font-pp"
     >
-      <form
-        onSubmit={onHandleSubmit}
-        className=" px-10 py-7 flex flex-col rounded-lg bg-gray-600 bg-opacity-10 w-max"
-      >
+      <div className=' pt-10 w-screen lg:w-6/12 flex flex-col justify-between h-max pb-10 lg:pb-0'>
+        <h1 className='font-pp lg:mx-0 mx-auto text-4xl 2xl:text-8xl xl:text-7xl font-bold bg-gradient-to-r from-gray-400 via-gray-500 to-gray-500 bg-clip-text text-transparent'>MemorizeApp</h1>
+        <h2 className='font-pp font-light text-lg text-center lg:text-start lg:px-0 px-10 lg:text-2xl text-gray-300 pt-5'>Store, organize and access all your passwords in one place, simplifying your digital life.</h2>
+      </div>
+      <form onSubmit={onHandleSubmit} className="shadow-2xl w-max mx-10  px-7 py-7 flex flex-col rounded-lg bg-zinc-800 bg-opacity-5  ">
         <h1 className="mx-auto text-2xl mb-5 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent  font-bold ">
           Sign Up
         </h1>
