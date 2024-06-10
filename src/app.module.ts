@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { RegisterModule } from './register/register.module';
+import { CorsMiddleware } from './middlewares/cors.middleware';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,4 +24,8 @@ import { RegisterModule } from './register/register.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CorsMiddleware).forRoutes('*'); // Aplica el middleware a todas las rutas
+}
+}
