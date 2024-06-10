@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 
 export const Home = () => {
   const navigate = useNavigate()
-  const URL = 'http://localhost:3000/api/v1'; 
+  const URL = 'https://backmemorize.zeabur.app'; 
   const token = localStorage.getItem('token');
   const cleanToken = token && JSON.parse(token);
   const decodedToken = cleanToken && JSON.parse(atob(cleanToken.split('.')[1]));

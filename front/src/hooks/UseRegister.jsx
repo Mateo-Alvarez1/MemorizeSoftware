@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs-react';
 import {  useState } from 'react';
 
 export const UseRegister = (  paramUrl , initialState , token , formRef ) => {
-    const URL = `http://localhost:3000/api/v1/${paramUrl}`;
+    const URL = `https://backmemorize.zeabur.app/api/v1/${paramUrl}`;
     const [form, setForm] = useState( initialState );
 
     const onHandleInput = (e) => {
