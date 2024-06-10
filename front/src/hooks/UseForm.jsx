@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export const useForm = ( paramUrl , initialState ) => {
-    const URL = `http://localhost:3000/api/v1/auth/${paramUrl}`;
+    const URL = `https://backendmemorize.zeabur.app/api/v1/auth/${paramUrl}`;
     const navigate = useNavigate();
   
     const [form, setForm] = useState( initialState );
