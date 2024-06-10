@@ -48,7 +48,7 @@ export const Home = () => {
           MemorizeApp 
         </h1>
         <div onClick={ () => setModal(!modal)} className={`cursor-pointer absolute right-5 lg:right-32 h-16 w-16 rounded-full bg-zinc-800 ${ modal && 'lg:w-60 lg:h-16'}`}>
-          <h2 className={`text-center text-2xl lg:text-2xl absolute bottom-0 left-5  lg:left-5 -top-16 left-2 -top-14 text-center py-20 font-pp font-medium text-zinc-400 ${modal && 'text-sm right-32 left-1.5 -top-12-5  lg:left-4 lg:-top-16'}`}> { modal ? decodedToken.fullName : initial}</h2>
+          <h2 className={`text-center text-2xl lg:text-2xl absolute bottom-0 left-5  lg:left-5 -top-16 left-2 -top-14 text-center py-20 font-pp font-medium text-zinc-400 ${modal && 'text-sm right-32 left-0 -top-12-5  lg:left-4 lg:-top-16'}`}> { modal ? decodedToken.fullName : initial}</h2>
           <p className={`bg-zinc-700 bg-opacity-20 lg:py-3.5 pt-16 pb-5 top-0 rounded-full  lg:pl-6 pr-1.5 lg:pr-5 cursor-pointer absolute lg:top-1 mr-2 right:20 -left-0 lg:left-28 flex lg:text-xl text-red-500 font-medium ${ modal ? 'block text-base lg:left-32 pl-1 pr-1':'hidden'} `}><span className='pl-1 lg:pl-0' onClick={logout}>Logout</span></p>
         </div>
       </div>
