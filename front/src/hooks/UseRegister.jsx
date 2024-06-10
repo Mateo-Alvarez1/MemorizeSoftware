@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs-react';
 import {  useState } from 'react';
 
 export const UseRegister = (  paramUrl , initialState , token , formRef ) => {
-    const URL = `https://backmemorize.zeabur.app/api/v1/${paramUrl}`;
+    const URL = `http://localhost:3000/api/v1/${paramUrl}`;
     const [form, setForm] = useState( initialState );
 
     const onHandleInput = (e) => {
@@ -17,6 +17,7 @@ export const UseRegister = (  paramUrl , initialState , token , formRef ) => {
  
       const onHandleSubmit = async (e) => {
         e.preventDefault()
+        
         if (form.name.trim().length < 2 ) {
           toast.error('Name must contain 2 letters or more');
           return
@@ -56,7 +57,6 @@ export const UseRegister = (  paramUrl , initialState , token , formRef ) => {
          toast.error('The record could not be created, check the data.')
          }
          toast.success('Register successfully created');
-         formRef.current.reset()
       }
   
       return {
