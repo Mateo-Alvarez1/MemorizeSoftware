@@ -8,7 +8,7 @@ export const Table = ({ password }) => {
   const [show, setShow] = useState({});
   const [modal, setModal] = useState(false)
 
-  const URL = 'http://localhost:3000/api/v1';
+  const URL = 'https://backendmemorize.zeabur.app/api/v1';
   const token = localStorage.getItem('token');
   const cleanToken = JSON.parse(token);
   
