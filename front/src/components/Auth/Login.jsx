@@ -3,6 +3,7 @@ import { Button } from '../../layout/Button';
 import { useForm } from '../../hooks/UseForm';
 import eyeOpen from '../../assets/eyeOpen.svg'
 import eyeClose from '../../assets/eye.svg'
+import { Link } from 'react-router-dom';
 export const Login = () => {
 
   const [show, setShow] = useState(false)
@@ -64,9 +65,9 @@ export const Login = () => {
         <Button text='Sign Up' />
         <p className="text-sm pt-4 mx-auto text-gray-200">
           Still don't have an account ?{' '}
-          <a href="https://memorize-software.vercel.app/register" className="text-indigo-500 underline">
+          <Link to={"/register"} className="text-indigo-500 underline">
             Sign Up
-          </a>
+          </Link>
         </p>
       </form>
     </div>

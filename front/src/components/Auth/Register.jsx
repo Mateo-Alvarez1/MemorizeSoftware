@@ -3,6 +3,7 @@ import { Button } from '../../layout/Button';
 import { useForm } from '../../hooks/UseForm';
 import eyeOpen from '../../assets/eyeOpen.svg'
 import eyeClose from '../../assets/eye.svg'
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
 
@@ -86,9 +87,9 @@ export const Register = () => {
         <Button text='Sign Up'/>
         <p className="text-sm pt-4 mx-auto text-gray-200 hover:">
           Already have an account ?{' '}
-          <a href="/login" className="text-indigo-500 underline">
+          <Link to={"/register"} className="text-indigo-500 underline">
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </div>
